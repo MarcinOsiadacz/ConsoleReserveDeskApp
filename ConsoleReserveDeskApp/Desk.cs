@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class Desk
+    class Desk : Furniture
     {
-        private User assignedUser;
-        private bool isReserved;
-
         // If the number value is 0, there is no assigned desk. In this case, the desk does not physically exist,
         // so it should not be possible to reserve it.
         private int number;
@@ -21,10 +18,7 @@ namespace ConsoleReserveDeskApp
             this.number = number;
             this.IsReserved = isReserved;
         }
-
-        public bool IsReserved { get => isReserved; set => isReserved = value; }
-
-        public void Reserve()
+        public override void Reserve()
         {
             if (IsReserved) { Console.WriteLine("The desk is already reserved"); }
             else
@@ -41,7 +35,7 @@ namespace ConsoleReserveDeskApp
                     $"The desk No {this.number} has been reserved for {assignedUser.FirstName} {assignedUser.LastName}");
             }
         }
-        public void Release()
+        public override void Release()
         {
             if (IsReserved)
             {
@@ -54,7 +48,7 @@ namespace ConsoleReserveDeskApp
             }
             else { Console.WriteLine("Reservation does not exist"); }
         }
-        public void Print()
+        public override void Print()
         {
             if(IsReserved)
             {

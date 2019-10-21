@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Building.cs" />
     <Compile Include="Desk.cs" />
+    <Compile Include="Furniture.cs" />
     <Compile Include="IReservation.cs" />
+    <Compile Include="IReservationManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />

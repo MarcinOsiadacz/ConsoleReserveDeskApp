@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class Room : IReservation
+    class Room : IReservationManagement
     {
         private string name;
         private const int MaxNumberOfDesks = 20;

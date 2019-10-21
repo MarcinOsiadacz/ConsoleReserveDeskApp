@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    interface IReservation
+    interface IReservationManagement
     {
-        void Reserve();
-        void Release();
+        void AddReservation();
+        void DeleteReservation();
+        void CheckReservation();
     }
 }

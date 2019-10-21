@@ -18,11 +18,9 @@ namespace ConsoleReserveDeskApp
             // lista zarezerwowanych biurek
 
             Building building = new Building();
-            building.AddRoom("test1");
-            building.AddRoom("test2");
+            building.AddRoom("Sala 108");
+            building.AddRoom("Sala 305");
             building.AddReservation();
-            building.PrintReservedDesks();
-            building.CheckReservation();
             building.DeleteReservation();
 
         }
