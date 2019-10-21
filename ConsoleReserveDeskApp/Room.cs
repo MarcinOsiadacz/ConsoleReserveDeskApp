@@ -9,7 +9,7 @@ namespace ConsoleReserveDeskApp
     class Room : IReservation
     {
         private string name;
-        private const int numberOfDesks = 20;
+        private const int MaxNumberOfDesks = 20;
         private List<Desk> allDesks = new List<Desk>();
 
         // selectedDesk field stores the number of the desk selected by user in reservation related methods.
@@ -23,10 +23,9 @@ namespace ConsoleReserveDeskApp
             // Number 0 means unassigned desk.
             this.selectedDesk = 0;
 
-            for (int i = 1; i <= numberOfDesks; i++)
+            for (int i = 0; i < MaxNumberOfDesks; i++)
             {   
-                // Desks are generated starting from number 1.
-                this.allDesks.Add(new Desk(number: i));
+                this.allDesks.Add(new Desk(number: i + 1));
             }
         }
         public void PrintAllDesks()
@@ -36,7 +35,7 @@ namespace ConsoleReserveDeskApp
                 desk.Print();
             }
 
-            Console.WriteLine($"Total desks: {numberOfDesks}");
+            Console.WriteLine($"Total desks: {MaxNumberOfDesks}");
         }
         public void PrintAvailableDesks()
         {
@@ -74,7 +73,7 @@ namespace ConsoleReserveDeskApp
             PrintAvailableDesks();
             SelectDesk();
 
-            if(this.selectedDesk != 0) { this.allDesks[this.selectedDesk].Reserve(); }
+            if(this.selectedDesk != 0) { this.allDesks[this.selectedDesk - 1].Reserve(); }
         }
         public void SelectDesk()
         {
@@ -88,7 +87,7 @@ namespace ConsoleReserveDeskApp
             {
                 this.selectedDesk = tmpSelectedDesk;
 
-                if(this.selectedDesk < 0 || this.selectedDesk > numberOfDesks)
+                if(this.selectedDesk < 0 || this.selectedDesk > MaxNumberOfDesks)
                 {
                     if(this.selectedDesk != 0)
                     {
@@ -105,7 +104,7 @@ namespace ConsoleReserveDeskApp
 
             if (this.selectedDesk != 0)
             {
-                this.allDesks[this.selectedDesk].Print();
+                this.allDesks[this.selectedDesk - 1].Print();
                 ResetSelectedDesk();
             }
         }
@@ -115,7 +114,7 @@ namespace ConsoleReserveDeskApp
             PrintReservedDesks();
             SelectDesk();
 
-            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk].Release(); }
+            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk - 1].Release(); }
         }
         public void Print()
         {
