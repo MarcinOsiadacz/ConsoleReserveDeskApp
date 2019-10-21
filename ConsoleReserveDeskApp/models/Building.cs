@@ -21,26 +21,39 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintAllDesks()
         {
-            foreach (Room room in this.allRooms)
+            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            else
             {
-                room.Print();
-                room.PrintAllDesks();
+                foreach (Room room in this.allRooms)
+                {
+                    room.Print();
+                    room.PrintAllDesks();
+                }
             }
         }
         public void PrintAvailableDesks()
         {
-            foreach (Room room in this.allRooms)
+            if (this.allRooms.Count == 0) {
+                Console.WriteLine("No rooms available in the building"); }
+            else
             {
-                room.Print();
-                room.PrintAvailableDesks();
+                foreach (Room room in this.allRooms)
+                {
+                    room.Print();
+                    room.PrintAvailableDesks();
+                }
             }
         }
         public void PrintReservedDesks()
         {
-            foreach (Room room in this.allRooms)
+            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            else
             {
-                room.Print();
-                room.PrintReservedDesks();
+                foreach (Room room in this.allRooms)
+                {
+                    room.Print();
+                    room.PrintReservedDesks();
+                }
             }
         }
         public void AddReservation()
@@ -83,41 +96,57 @@ namespace ConsoleReserveDeskApp
             {
                 this.allRooms.Add(new Room(name));
                 this.currentNumberOfRooms++;
+                Console.WriteLine($"Room {name} has been added to the building");
             }
             else { Console.WriteLine("No more rooms can be added"); }
+        }
+        public void ReadRoom()
+        {
+            Console.WriteLine("*** Add room ***\n");
+            Console.WriteLine("Enter room name: ");
+
+            string roomName = Console.ReadLine();
+            this.AddRoom(roomName);
         }
         public void SelectRoom()
         {
             PrintAllRooms();
 
-            int tmpSelectedRoom;
+            if (this.allRooms.Count > 0)
+            {   
+                int tmpSelectedRoom;
 
-            Console.WriteLine("Please enter a number of the room (or 0 to quit): ");
-            string strRoom = Console.ReadLine();
+                Console.WriteLine("Please enter a number of the room (or 0 to quit): ");
+                string strRoom = Console.ReadLine();
 
-            if (!Int32.TryParse(strRoom, out tmpSelectedRoom)) { Console.WriteLine("Invalid number"); }
-            else
-            {
-                this.selectedRoom = tmpSelectedRoom;
-
-                if (this.selectedRoom < 0 || this.selectedRoom > this.currentNumberOfRooms)
+                if (!Int32.TryParse(strRoom, out tmpSelectedRoom)) { Console.WriteLine("Invalid number"); }
+                else
                 {
-                    if (this.selectedRoom != 0)
+                    this.selectedRoom = tmpSelectedRoom;
+
+                    if (this.selectedRoom < 0 || this.selectedRoom > this.currentNumberOfRooms)
                     {
-                        this.selectedRoom = 0;
-                        Console.WriteLine("Room does not exist");
+                        if (this.selectedRoom != 0)
+                        {
+                            this.selectedRoom = 0;
+                            Console.WriteLine("Room does not exist");
+                        }
                     }
                 }
             }
         }
         public void PrintAllRooms()
         {
-            for(int i = 0; i < this.currentNumberOfRooms; i++)
+            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            else
             {
-                Console.WriteLine($"{i + 1}. {this.allRooms[i].Name}");
-            }
+                for (int i = 0; i < this.currentNumberOfRooms; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {this.allRooms[i].Name}");
+                }
 
-            Console.WriteLine($"Total rooms: {this.currentNumberOfRooms}\n");
+                Console.WriteLine($"Total rooms: {this.currentNumberOfRooms}\n");
+            }
         }
     }
 }

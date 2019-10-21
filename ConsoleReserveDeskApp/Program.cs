@@ -11,21 +11,18 @@ namespace ConsoleReserveDeskApp
         static void Main(string[] args)
         {
             Building building = new Building();
+            building.AddRoom("Test 99");
 
-            building.AddRoom("Test 1");
-            building.AddRoom("Test 2");
-            building.AddRoom("Test 3");
+            char mainMenuOper;
+            Menu.PrintMainMenu();
 
-            char oper;
-            Menu.PrintMenu();
+            mainMenuOper = Menu.ReadOper();
 
-            oper = Console.ReadKey().KeyChar;
-
-            while(oper != '7')
+            while(mainMenuOper != '8')
             {
                 Console.Clear();
 
-                switch (oper)
+                switch (mainMenuOper)
                 {
                     case '1':
                         building.AddReservation();
@@ -51,14 +48,40 @@ namespace ConsoleReserveDeskApp
                         building.PrintReservedDesks();
                         Menu.WaitForAnyButton();
                         break;
+                    case '7':
+                        char adminMenuOper;
+                        Menu.PrintAdminMenu();
+
+                        adminMenuOper = Menu.ReadOper();
+
+                        while (adminMenuOper != '2')
+                        {
+                            Console.Clear();
+
+                            switch (adminMenuOper)
+                            {
+                                case '1':
+                                    building.ReadRoom();
+                                    Menu.WaitForAnyButton();
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            Console.Clear();
+                            Menu.PrintAdminMenu();
+
+                            adminMenuOper = Menu.ReadOper();
+                        }
+                        break;
                     default:
                         break;
                 }
 
                 Console.Clear();
-                Menu.PrintMenu();
+                Menu.PrintMainMenu();
 
-                oper = Console.ReadKey().KeyChar;
+                mainMenuOper = Menu.ReadOper();
             }
         }
     }
