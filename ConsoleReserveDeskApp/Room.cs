@@ -70,17 +70,17 @@ namespace ConsoleReserveDeskApp
         }
         public void AddReservation()
         {
-            Console.WriteLine("Add reservation: \n");
+            Console.WriteLine("*** Add reservation ***");
             PrintAvailableDesks();
             SelectDesk();
 
-            if(this.selectedDesk != 0) { this.allDesks[this.selectedDesk].AddReservation(); }
+            if(this.selectedDesk != 0) { this.allDesks[this.selectedDesk].Reserve(); }
         }
         public void SelectDesk()
         {
             int tmpSelectedDesk;
 
-            Console.WriteLine("\nPlease enter a number of the desk (or 0 to quit): ");
+            Console.WriteLine("Please enter a number of the desk (or 0 to quit): ");
             string strDesk = Console.ReadLine();
 
             if (!Int32.TryParse(strDesk, out tmpSelectedDesk)) { Console.WriteLine("Invalid number"); }
@@ -98,24 +98,32 @@ namespace ConsoleReserveDeskApp
                 }
             }
         }
-        public void CheckDeskAvailability()
+        public void CheckReservation()
         {
-            Console.WriteLine("Check desk availability: \n");
+            Console.WriteLine("*** Check reservation ***");
             SelectDesk();
 
-            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk].Print(); }
+            if (this.selectedDesk != 0)
+            {
+                this.allDesks[this.selectedDesk].Print();
+                ResetSelectedDesk();
+            }
         }
         public void DeleteReservation()
         {
-            Console.WriteLine("Delete reservation: \n");
+            Console.WriteLine("*** Delete reservation ***");
             PrintReservedDesks();
             SelectDesk();
 
-            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk].DeleteReservation(); }
+            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk].Release(); }
         }
         public void Print()
         {
             Console.WriteLine($"Room {this.Name}");
+        }
+        public void ResetSelectedDesk()
+        {
+            this.selectedDesk = 0;
         }
     }
 }

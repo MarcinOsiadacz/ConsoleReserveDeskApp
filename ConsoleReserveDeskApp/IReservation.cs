@@ -10,5 +10,6 @@ namespace ConsoleReserveDeskApp
     {
         void AddReservation();
         void DeleteReservation();
+        void CheckReservation();
     }
 }

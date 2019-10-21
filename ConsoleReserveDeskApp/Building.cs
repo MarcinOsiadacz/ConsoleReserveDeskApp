@@ -45,16 +45,37 @@ namespace ConsoleReserveDeskApp
         }
         public void AddReservation()
         {
-            // to be implemented
+            Console.WriteLine("*** Add reservation ***");
+
+            SelectRoom();
+
+            if (this.selectedRoom != 0)
+            {
+                this.allRooms[this.selectedRoom - 1].AddReservation();
+            }
         }
 
         public void DeleteReservation()
         {
-            // to be implemented 
+            Console.WriteLine("*** Delete reservation ***");
+
+            SelectRoom();
+
+            if (this.selectedRoom != 0)
+            {
+                this.allRooms[this.selectedRoom - 1].DeleteReservation();
+            }
         }
-        public void CheckDeskAvailability()
+        public void CheckReservation()
         {
-            // to be implemented
+            Console.WriteLine("*** Check reservation ***");
+
+            SelectRoom();
+
+            if(this.selectedRoom != 0)
+            {
+                this.allRooms[this.selectedRoom - 1].CheckReservation();
+            }
         }
         public void AddRoom(string name)
         {
@@ -71,7 +92,7 @@ namespace ConsoleReserveDeskApp
 
             int tmpSelectedRoom;
 
-            Console.WriteLine("\nPlease enter a number of the room (or 0 to quit): ");
+            Console.WriteLine("Please enter a number of the room (or 0 to quit): ");
             string strRoom = Console.ReadLine();
 
             if (!Int32.TryParse(strRoom, out tmpSelectedRoom)) { Console.WriteLine("Invalid number"); }

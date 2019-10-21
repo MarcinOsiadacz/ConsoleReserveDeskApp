@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class Desk : IReservation
+    class Desk
     {
         private User assignedUser;
         private bool isReserved;
@@ -24,7 +24,7 @@ namespace ConsoleReserveDeskApp
 
         public bool IsReserved { get => isReserved; set => isReserved = value; }
 
-        public void AddReservation()
+        public void Reserve()
         {
             if (IsReserved) { Console.WriteLine("The desk is already reserved"); }
             else
@@ -41,7 +41,7 @@ namespace ConsoleReserveDeskApp
                     $"The desk No {this.number} has been reserved for {assignedUser.FirstName} {assignedUser.LastName}");
             }
         }
-        public void DeleteReservation()
+        public void Release()
         {
             if (IsReserved)
             {

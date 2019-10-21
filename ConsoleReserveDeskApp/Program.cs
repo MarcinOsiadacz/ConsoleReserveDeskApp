@@ -20,7 +20,10 @@ namespace ConsoleReserveDeskApp
             Building building = new Building();
             building.AddRoom("test1");
             building.AddRoom("test2");
-            building.PrintAllRooms();
+            building.AddReservation();
+            building.PrintReservedDesks();
+            building.CheckReservation();
+            building.DeleteReservation();
 
         }
     }
