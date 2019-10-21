@@ -32,7 +32,7 @@ namespace ConsoleReserveDeskApp
                 IsReserved = true;
 
                 Console.WriteLine(
-                    $"The desk No {this.number} has been reserved for {assignedUser.FirstName} {assignedUser.LastName}");
+                    $"The desk {this.number}. has been reserved for {assignedUser.FirstName} {assignedUser.LastName}");
             }
         }
         public override void Release()
@@ -53,9 +53,9 @@ namespace ConsoleReserveDeskApp
             if(IsReserved)
             {
                 Console.WriteLine(
-                    $"Desk No {this.number}, reserved by {this.assignedUser.FirstName} {this.assignedUser.LastName}");
+                    $"Desk {this.number} - reserved by {this.assignedUser.FirstName} {this.assignedUser.LastName}");
             }
-            else { Console.WriteLine($"Desk No {this.number}, available"); }
+            else { Console.WriteLine($"Desk {this.number} - available"); }
         }
     }
 }
