@@ -45,7 +45,7 @@ namespace ConsoleReserveDeskApp
         }
         public void AddReservation()
         {
-            Console.WriteLine("*** Add reservation ***");
+            Console.WriteLine("*** Add reservation ***\n");
 
             SelectRoom();
 
@@ -57,7 +57,7 @@ namespace ConsoleReserveDeskApp
 
         public void DeleteReservation()
         {
-            Console.WriteLine("*** Delete reservation ***");
+            Console.WriteLine("*** Delete reservation ***\n");
 
             SelectRoom();
 
@@ -68,7 +68,7 @@ namespace ConsoleReserveDeskApp
         }
         public void CheckReservation()
         {
-            Console.WriteLine("*** Check reservation ***");
+            Console.WriteLine("*** Check reservation ***\n");
 
             SelectRoom();
 
@@ -114,10 +114,10 @@ namespace ConsoleReserveDeskApp
         {
             for(int i = 0; i < this.currentNumberOfRooms; i++)
             {
-                Console.WriteLine($"Room no {i + 1}:  {this.allRooms[i].Name}");
+                Console.WriteLine($"{i + 1}. {this.allRooms[i].Name}");
             }
 
-            Console.WriteLine($"Total rooms: {this.currentNumberOfRooms}");
+            Console.WriteLine($"Total rooms: {this.currentNumberOfRooms}\n");
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ConsoleReserveDeskApp
                 desk.Print();
             }
 
-            Console.WriteLine($"Total desks: {MaxNumberOfDesks}");
+            Console.WriteLine($"Total desks: {MaxNumberOfDesks}\n");
         }
         public void PrintAvailableDesks()
         {
@@ -50,7 +50,7 @@ namespace ConsoleReserveDeskApp
                 }
             }
 
-            Console.WriteLine($"Total available desks: {availableDeskCounter}");
+            Console.WriteLine($"Total available desks: {availableDeskCounter}\n");
         }
         public void PrintReservedDesks()
         {
@@ -65,7 +65,7 @@ namespace ConsoleReserveDeskApp
                 }
             }
 
-            Console.WriteLine($"Total reserved desks: {reservedDeskCounter}");
+            Console.WriteLine($"Total reserved desks: {reservedDeskCounter}\n");
         }
         public void AddReservation()
         {
