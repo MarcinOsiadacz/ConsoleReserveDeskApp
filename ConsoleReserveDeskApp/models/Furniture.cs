@@ -8,10 +8,8 @@ namespace ConsoleReserveDeskApp
 {
     abstract class Furniture : IReservation
     {
-        protected User assignedUser;
-        protected bool isReserved;
+        protected int number;
 
-        public bool IsReserved { get => isReserved; set => isReserved = value; }
         public abstract void Reserve();
         public abstract void Release();
         public abstract void Print();

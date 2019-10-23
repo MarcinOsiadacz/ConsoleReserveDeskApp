@@ -10,14 +10,17 @@ namespace ConsoleReserveDeskApp
     {
         // If the number value is 0, there is no assigned desk. In this case, the desk does not physically exist,
         // so it should not be possible to reserve it.
-        private int number;
-
+        
+        private User assignedUser;
+        private bool isReserved;
+       
         public Desk(string userFirstName = "", string userLastName = "", int number = 0, bool isReserved = false)
         {
             this.assignedUser = new User(userFirstName, userLastName);
             this.number = number;
             this.IsReserved = isReserved;
         }
+        public bool IsReserved { get => isReserved; set => isReserved = value; }
         public override void Reserve()
         {
             if (IsReserved) { Console.WriteLine("The desk is already reserved"); }
