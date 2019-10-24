@@ -35,6 +35,9 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("(Press any button to quit)");
             Console.ReadKey();
         }
-        public static char ReadOper() { return Console.ReadKey().KeyChar; }
+        public static char ReadOper()
+        {
+            return Console.ReadKey().KeyChar;
+        }
     }
 }

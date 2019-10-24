@@ -49,6 +49,7 @@ namespace ConsoleReserveDeskApp
                         Menu.WaitForAnyButton();
                         break;
                     case '7':
+                        // Nested menu for building management
                         char adminMenuOper;
                         Menu.PrintAdminMenu();
 

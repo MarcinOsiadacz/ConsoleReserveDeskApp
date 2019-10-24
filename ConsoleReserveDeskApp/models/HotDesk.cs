@@ -28,21 +28,38 @@ namespace ConsoleReserveDeskApp
             // to be implemented
         }
         public bool IsReservationValid(Reservation pendingReservation)
-        {
-            bool status = true;
+        {   // Returns true if the reservation is valid and can be made. False otherwise.
 
-            if (this.currentReservations.Count > 0)
+            bool isValid = true;
+
+            // Reservation is invalid if it ends before it begins
+            if (DateTime.Compare(pendingReservation.StartTime, pendingReservation.EndTime) == 1)
             {
+                isValid = false;
+            }
+            // Else if there are any reservations for this desk
+            else if (this.currentReservations.Count > 0)
+            {
+                // Compare pending reservation with all current reservations for this desk
                 foreach (Reservation currentReservation in this.currentReservations)
                 {
-                    if (DateTime.Compare(pendingReservation.StartTime, currentReservation.StartTime) == 1 &&
-                        DateTime.Compare(pendingReservation.StartTime, currentReservation.EndTime) == -1)
+                    // Reservation is invalid if it begins during another reservation
+                    if (DateTime.Compare(pendingReservation.StartTime, currentReservation.StartTime) == 1 
+                        && DateTime.Compare(pendingReservation.StartTime, currentReservation.EndTime) == -1)
                     {
-
+                        isValid = false;
+                        break;
+                    }
+                    // Reservation is invalid if it ends during another reservation
+                    else if (DateTime.Compare(pendingReservation.EndTime, currentReservation.StartTime) == 1 
+                        && DateTime.Compare(pendingReservation.EndTime, currentReservation.EndTime) == -1)
+                    {
+                        isValid = false;
+                        break;
                     }
                 }
             }
-            return false;
+            return isValid;
         }
     }
 }
