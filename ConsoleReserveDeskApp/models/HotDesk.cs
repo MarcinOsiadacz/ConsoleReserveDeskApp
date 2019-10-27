@@ -30,7 +30,13 @@ namespace ConsoleReserveDeskApp
 
             if (DateTime.TryParse(startTime, out tmpStartTime) && DateTime.TryParse(endTime, out tmpEndTime))
             {
-                this.selectedReservation = new Reservation(tmpStartTime, tmpEndTime);
+                Console.WriteLine("Please enter a first name: ");
+                string tmpFirstName = Console.ReadLine();
+
+                Console.WriteLine("Please enter a last name: ");
+                string tmpLastName = Console.ReadLine();
+
+                this.selectedReservation = new Reservation(tmpStartTime, tmpEndTime, tmpFirstName, tmpLastName);
                 state = true;
             }
 
@@ -44,12 +50,6 @@ namespace ConsoleReserveDeskApp
                 if (!this.IsReservationValid()) { Console.WriteLine("The HotDesk reservation cannot be made"); }
                 else
                 {
-                    Console.WriteLine("Please enter a first name: ");
-                    this.selectedReservation.User.FirstName = Console.ReadLine();
-
-                    Console.WriteLine("Please enter a last name: ");
-                    this.selectedReservation.User.LastName = Console.ReadLine();
-
                     this.currentReservations.Add(this.selectedReservation);
 
                     Console.WriteLine($"The HotDesk {this.number}. has been reserved from {this.selectedReservation.StartTime} to {this.selectedReservation.EndTime} for {this.selectedReservation.User.FirstName} {this.selectedReservation.User.LastName}");
@@ -58,7 +58,24 @@ namespace ConsoleReserveDeskApp
         }
         public override void Release()
         {
-            // to be implemented
+            if (!this.SelectReservation()) { Console.WriteLine("Incorrect reservation data format"); }
+            else
+            {
+                // Index of reservation found, -1 otherwise.
+                int reservationIndex = this.currentReservations.FindIndex(
+                    x => x.StartTime == this.selectedReservation.StartTime
+                    && x.EndTime == this.selectedReservation.EndTime
+                    && x.User.FirstName == this.selectedReservation.User.FirstName
+                    && x.User.LastName == this.selectedReservation.User.LastName);
+
+                if (reservationIndex == -1) { Console.WriteLine("Reservation does not exist"); }
+                else 
+                {
+                    this.currentReservations.RemoveAt(reservationIndex);
+
+                    Console.WriteLine("Reservation has been deleted");
+                }
+            }       
         }
         public override void Print()
         {
