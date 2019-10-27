@@ -12,7 +12,7 @@ namespace ConsoleReserveDeskApp
         private DateTime startTime;
         private DateTime endTime;
 
-        public Reservation(string userFirstName, string userLastName, DateTime startTime, DateTime endTime)
+        public Reservation(DateTime startTime, DateTime endTime, string userFirstName = "", string userLastName = "")
         {
             this.User = new User(userFirstName, userLastName);
             this.StartTime = startTime;
