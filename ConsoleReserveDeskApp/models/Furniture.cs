@@ -8,6 +8,8 @@ namespace ConsoleReserveDeskApp
 {
     class Furniture : IReservation
     {
+        // If the number value is 0, there is no assigned desk. In this case, the desk does not physically exist,
+        // so it should not be possible to reserve it.
         protected int number;
 
         public Furniture() { }

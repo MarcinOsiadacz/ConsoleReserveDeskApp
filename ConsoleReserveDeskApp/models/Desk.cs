@@ -8,9 +8,6 @@ namespace ConsoleReserveDeskApp
 {
     class Desk : Furniture
     {
-        // If the number value is 0, there is no assigned desk. In this case, the desk does not physically exist,
-        // so it should not be possible to reserve it.
-        
         private User assignedUser;
         private bool isReserved;
        

@@ -20,10 +20,10 @@ namespace ConsoleReserveDeskApp
         {
             bool state = false;
 
-            Console.WriteLine("Please enter start time (yyyy-MM-dd hh:mm): ");
+            Console.WriteLine("Please enter start time (yyyy-MM-dd HH:mm): ");
             string startTime = Console.ReadLine();
 
-            Console.WriteLine("Please enter end time (yyyy-MM-dd hh:mm): ");
+            Console.WriteLine("Please enter end time (yyyy-MM-dd HH:mm): ");
             string endTime = Console.ReadLine();
 
             DateTime tmpStartTime, tmpEndTime;
@@ -71,10 +71,10 @@ namespace ConsoleReserveDeskApp
             {
                 // Stores the index of the selected reservation or -1 if not found.
                 int reservationIndex = this.currentReservations.FindIndex(
-                    x => x.StartTime == this.selectedReservation.StartTime
-                    && x.EndTime == this.selectedReservation.EndTime
-                    && x.User.FirstName == this.selectedReservation.User.FirstName
-                    && x.User.LastName == this.selectedReservation.User.LastName);
+                    reservation => reservation.StartTime == this.selectedReservation.StartTime
+                    && reservation.EndTime == this.selectedReservation.EndTime
+                    && reservation.User.FirstName == this.selectedReservation.User.FirstName
+                    && reservation.User.LastName == this.selectedReservation.User.LastName);
 
                 if (reservationIndex == -1) { Console.WriteLine("Reservation does not exist"); }
                 else 
@@ -89,7 +89,7 @@ namespace ConsoleReserveDeskApp
         {
             if (this.currentReservations.Count > 0)
             {
-                Console.WriteLine($"Hot desk { this.number} - current reservations:");
+                Console.WriteLine($"Hot desk {this.number} - current reservations:");
                 foreach (Reservation reservation in this.currentReservations)
                 {
                     Console.WriteLine(
