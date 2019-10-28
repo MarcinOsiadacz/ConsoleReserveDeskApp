@@ -10,12 +10,6 @@ namespace ConsoleReserveDeskApp
     {
         static void Main(string[] args)
         {
-            HotDesk desk = new HotDesk(3);
-            desk.Reserve();
-            desk.Print();
-            desk.Release();
-            desk.Print();
-
 
             Building building = new Building();
             building.AddRoom("Test 99");

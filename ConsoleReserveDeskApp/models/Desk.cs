@@ -18,12 +18,15 @@ namespace ConsoleReserveDeskApp
         {
             this.assignedUser = new User(userFirstName, userLastName);
             this.number = number;
-            this.IsReserved = isReserved;
+            this.isReserved = isReserved;
         }
-        public bool IsReserved { get => isReserved; set => isReserved = value; }
+        public override bool IsReserved()
+        {
+            return this.isReserved;
+        }
         public override void Reserve()
         {
-            if (IsReserved) { Console.WriteLine("The desk is already reserved"); }
+            if (this.isReserved) { Console.WriteLine("The desk is already reserved"); }
             else
             {
                 Console.WriteLine("Please enter a first name: ");
@@ -32,7 +35,7 @@ namespace ConsoleReserveDeskApp
                 Console.WriteLine("Please enter a last name: ");
                 this.assignedUser.LastName = Console.ReadLine();
 
-                IsReserved = true;
+                this.isReserved = true;
 
                 Console.WriteLine(
                     $"The desk {this.number}. has been reserved for {assignedUser.FirstName} {assignedUser.LastName}");
@@ -40,12 +43,12 @@ namespace ConsoleReserveDeskApp
         }
         public override void Release()
         {
-            if (IsReserved)
+            if (this.isReserved)
             {
                 this.assignedUser.FirstName = "";
                 this.assignedUser.LastName = "";
 
-                this.IsReserved = false;
+                this.isReserved = false;
 
                 Console.WriteLine("Reservation has been deleted");
             }
@@ -53,7 +56,7 @@ namespace ConsoleReserveDeskApp
         }
         public override void Print()
         {
-            if(IsReserved)
+            if(this.isReserved)
             {
                 Console.WriteLine(
                     $"Desk {this.number} - reserved by {this.assignedUser.FirstName} {this.assignedUser.LastName}");

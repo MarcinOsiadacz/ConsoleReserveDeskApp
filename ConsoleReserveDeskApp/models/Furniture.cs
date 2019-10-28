@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    abstract class Furniture : IReservation
+    class Furniture : IReservation
     {
         protected int number;
 
-        public abstract void Reserve();
-        public abstract void Release();
-        public abstract void Print();
+        public Furniture() { }
+        public virtual bool IsReserved() { return false; }
+        public virtual void Reserve() { }
+        public virtual void Release() { }
+        public virtual void Print() { }
     }
 }

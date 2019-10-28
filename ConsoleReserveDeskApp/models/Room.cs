@@ -10,7 +10,7 @@ namespace ConsoleReserveDeskApp
     {
         private string name;
         private const int MaxNumberOfDesks = 20;
-        private List<Desk> allDesks = new List<Desk>();
+        private List<Furniture> allDesks = new List<Furniture>();
 
         // selectedDesk field stores the number of the desk selected by user in reservation related methods.
         private int selectedDesk;
@@ -25,12 +25,13 @@ namespace ConsoleReserveDeskApp
 
             for (int i = 0; i < MaxNumberOfDesks; i++)
             {   
-                this.allDesks.Add(new Desk(number: i + 1));
+                if (i < (MaxNumberOfDesks/2)) { this.allDesks.Add(new Desk(number: i + 1)); }
+                else { this.allDesks.Add(new HotDesk(number: i + 1)); }  
             }
         }
         public void PrintAllDesks()
         {
-            foreach (Desk desk in this.allDesks)
+            foreach (Furniture desk in this.allDesks)
             {
                 desk.Print();
             }
@@ -41,13 +42,21 @@ namespace ConsoleReserveDeskApp
         {
             int availableDeskCounter = 0;
 
-            foreach (Desk desk in this.allDesks)
+            foreach (Furniture desk in this.allDesks)
             {
-                if (!desk.IsReserved)
+                if (desk.GetType() == typeof(HotDesk))
                 {
                     desk.Print();
                     availableDeskCounter++;
                 }
+                else
+                {
+                    if (!desk.IsReserved())
+                    {
+                        desk.Print();
+                        availableDeskCounter++;
+                    }
+                }  
             }
 
             Console.WriteLine($"Total available desks: {availableDeskCounter}\n");
@@ -56,9 +65,9 @@ namespace ConsoleReserveDeskApp
         {
             int reservedDeskCounter = 0;
 
-            foreach (Desk desk in this.allDesks)
+            foreach (Furniture desk in this.allDesks)
             {
-                if (desk.IsReserved)
+                if (desk.IsReserved())
                 {
                     desk.Print();
                     reservedDeskCounter++;

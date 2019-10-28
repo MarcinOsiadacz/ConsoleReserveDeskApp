@@ -42,6 +42,14 @@ namespace ConsoleReserveDeskApp
 
             return state;
         }
+        public override bool IsReserved()
+        {
+            if(this.currentReservations.Count > 0)
+            {
+                return true;
+            }
+            else { return false; }
+        }
         public override void Reserve()
         {   
             if (!this.SelectReservation()) { Console.WriteLine("Incorrect reservation data format"); }
@@ -61,7 +69,7 @@ namespace ConsoleReserveDeskApp
             if (!this.SelectReservation()) { Console.WriteLine("Incorrect reservation data format"); }
             else
             {
-                // Index of reservation found, -1 otherwise.
+                // Stores the index of the selected reservation or -1 if not found.
                 int reservationIndex = this.currentReservations.FindIndex(
                     x => x.StartTime == this.selectedReservation.StartTime
                     && x.EndTime == this.selectedReservation.EndTime
