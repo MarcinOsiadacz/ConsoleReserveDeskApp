@@ -8,10 +8,11 @@ namespace ConsoleReserveDeskApp
 {
     class Room : IReservationManagement
     {
+        // Room class is used to manage desks
         private string name;
         private const int MaxNumberOfDesks = 20;
+        // allDesks list stores objects of all Furniture derived classes
         private List<Furniture> allDesks = new List<Furniture>();
-
         // selectedDesk field stores the number of the desk selected by user in reservation related methods.
         private int selectedDesk;
 
@@ -24,17 +25,15 @@ namespace ConsoleReserveDeskApp
             this.selectedDesk = 0;
 
             for (int i = 0; i < MaxNumberOfDesks; i++)
-            {   
+            {   // Desk objects are created for the first half of the list
                 if (i < (MaxNumberOfDesks/2)) { this.allDesks.Add(new Desk(number: i + 1)); }
+                // and HotDesk objects for the second one.
                 else { this.allDesks.Add(new HotDesk(number: i + 1)); }  
             }
         }
         public void PrintAllDesks()
         {
-            foreach (Furniture desk in this.allDesks)
-            {
-                desk.Print();
-            }
+            foreach (Furniture desk in this.allDesks) { desk.Print(); }
 
             Console.WriteLine($"Total desks: {MaxNumberOfDesks}\n");
         }
@@ -44,13 +43,14 @@ namespace ConsoleReserveDeskApp
 
             foreach (Furniture desk in this.allDesks)
             {
+                // HotDesk instances are always available even if they are reserved on certain dates
                 if (desk.GetType() == typeof(HotDesk))
                 {
                     desk.Print();
                     availableDeskCounter++;
                 }
                 else
-                {
+                { // Desk instances are available only if IsReserved method returns false
                     if (!desk.IsReserved())
                     {
                         desk.Print();
@@ -127,9 +127,9 @@ namespace ConsoleReserveDeskApp
         }
         public void Print()
         {
-            Console.WriteLine($"Room {this.Name}");
+            Console.WriteLine($"Room {this.Name}\n");
         }
-        public void ResetSelectedDesk()
+        private void ResetSelectedDesk()
         {
             this.selectedDesk = 0;
         }

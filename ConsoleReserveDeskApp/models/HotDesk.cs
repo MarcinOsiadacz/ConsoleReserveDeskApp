@@ -55,12 +55,12 @@ namespace ConsoleReserveDeskApp
             if (!this.SelectReservation()) { Console.WriteLine("Incorrect reservation data format"); }
             else
             {
-                if (!this.IsReservationValid()) { Console.WriteLine("The HotDesk reservation cannot be made"); }
+                if (!this.IsReservationValid()) { Console.WriteLine("The hot desk reservation cannot be made"); }
                 else
                 {
                     this.currentReservations.Add(this.selectedReservation);
 
-                    Console.WriteLine($"The HotDesk {this.number}. has been reserved from {this.selectedReservation.StartTime} to {this.selectedReservation.EndTime} for {this.selectedReservation.User.FirstName} {this.selectedReservation.User.LastName}");
+                    Console.WriteLine($"The hot desk {this.number}. has been reserved from {this.selectedReservation.StartTime} to {this.selectedReservation.EndTime} for {this.selectedReservation.User.FirstName} {this.selectedReservation.User.LastName}");
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace ConsoleReserveDeskApp
         {
             if (this.currentReservations.Count > 0)
             {
-                Console.WriteLine($"Hot Desk { this.number} - current reservations:");
+                Console.WriteLine($"Hot desk { this.number} - current reservations:");
                 foreach (Reservation reservation in this.currentReservations)
                 {
                     Console.WriteLine(
@@ -97,7 +97,7 @@ namespace ConsoleReserveDeskApp
                     $"by {reservation.User.FirstName} {reservation.User.LastName}");
                 } 
             }
-            else { Console.WriteLine($"Hot Desk {this.number} - available"); }
+            else { Console.WriteLine($"Hot desk {this.number} - available"); }
         }
         public bool IsReservationValid()
         {   // Returns true if the reservation is valid and can be made. False otherwise.
