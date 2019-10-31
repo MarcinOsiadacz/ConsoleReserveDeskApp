@@ -11,8 +11,8 @@ namespace ConsoleReserveDeskApp
         // Room class is used to manage desks
         private string name;
         private const int MaxNumberOfDesks = 20;
-        // allDesks list stores objects of all Furniture derived classes
-        private List<Furniture> allDesks = new List<Furniture>();
+        // allDesks list stores objects of all Desk derived classes
+        private List<Desk> allDesks = new List<Desk>();
         // selectedDesk field stores the number of the desk selected by user in reservation related methods.
         private int selectedDesk;
 
@@ -33,7 +33,7 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintAllDesks()
         {
-            foreach (Furniture desk in this.allDesks) { desk.Print(); }
+            foreach (Desk desk in this.allDesks) { desk.Print(); }
 
             Console.WriteLine($"Total desks: {MaxNumberOfDesks}\n");
         }
@@ -41,7 +41,7 @@ namespace ConsoleReserveDeskApp
         {
             int availableDeskCounter = 0;
 
-            foreach (Furniture desk in this.allDesks)
+            foreach (Desk desk in this.allDesks)
             {
                 // HotDesk instances are always available even if they are reserved on certain dates
                 if (desk.GetType() == typeof(HotDesk))
@@ -65,7 +65,7 @@ namespace ConsoleReserveDeskApp
         {
             int reservedDeskCounter = 0;
 
-            foreach (Furniture desk in this.allDesks)
+            foreach (Desk desk in this.allDesks)
             {
                 if (desk.IsReserved())
                 {

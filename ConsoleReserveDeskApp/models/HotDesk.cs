@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class HotDesk : Furniture
+    class HotDesk : Desk
     {
         // This list holds current reservations for HotDesk object
         private List<Reservation> currentReservations = new List<Reservation>();
@@ -99,7 +99,7 @@ namespace ConsoleReserveDeskApp
             }
             else { Console.WriteLine($"Hot desk {this.number} - available"); }
         }
-        public bool IsReservationValid()
+        private bool IsReservationValid()
         {   // Returns true if the reservation is valid and can be made. False otherwise.
 
             bool isValid = true;
