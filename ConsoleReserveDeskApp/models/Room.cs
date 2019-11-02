@@ -10,7 +10,7 @@ namespace ConsoleReserveDeskApp
     {
         // Room class is used to manage desks
         private string name;
-        private const int MaxNumberOfDesks = 20;
+        private const int maxNumberOfDesks = 20;
         // allDesks list stores objects of all Desk derived classes
         private List<Equipment> allDesks = new List<Equipment>();
         // selectedDesk field stores the number of the desk selected by user in reservation related methods.
@@ -24,7 +24,7 @@ namespace ConsoleReserveDeskApp
             // Number 0 means unassigned desk.
             this.selectedDesk = 0;
 
-            for (int i = 0; i < MaxNumberOfDesks/2; i++)
+            for (int i = 0; i < maxNumberOfDesks/2; i++)
             {   
                 if (i % 2 == 0)
                 {
@@ -114,7 +114,7 @@ namespace ConsoleReserveDeskApp
             {
                 this.selectedDesk = tmpSelectedDesk;
 
-                if(this.selectedDesk < 0 || this.selectedDesk > MaxNumberOfDesks)
+                if(this.selectedDesk < 0 || this.selectedDesk > maxNumberOfDesks)
                 {
                     if(this.selectedDesk != 0)
                     {
@@ -146,6 +146,38 @@ namespace ConsoleReserveDeskApp
         public void Print()
         {
             Console.WriteLine($"Room {this.Name}\n");
+        }
+        public void AddDesk()
+        {
+            Console.WriteLine("*** Add Desk ***");
+
+            if (this.allDesks.Count < maxNumberOfDesks)
+            {
+                Console.WriteLine("Do you want to add a regular desk or a hot desk?");
+                Console.WriteLine("1 - Desk");
+                Console.WriteLine("2 - Hot desk");
+
+                char deskType = Console.ReadKey().KeyChar;
+
+                switch (deskType)
+                {
+                    case '1':
+                        this.allDesks.Add(new Desk(number: this.allDesks.Count + 1));
+                        Console.WriteLine("\nDesk has been added");
+                        break;
+                    case '2':
+                        this.allDesks.Add(new HotDesk(number: this.allDesks.Count + 1));
+                        Console.WriteLine("\nHot desk has been added");
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid selection");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("No more desks can be added");
+            }
         }
         private void ResetSelectedDesk()
         {

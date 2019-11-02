@@ -100,6 +100,25 @@ namespace ConsoleReserveDeskApp
             }
             else { Console.WriteLine("No more rooms can be added"); }
         }
+        public void DeleteRoom()
+        {
+            Console.WriteLine("*** Delete room ***\n");
+
+            SelectRoom();
+            
+            if(this.selectedRoom != 0)
+            {
+                if (this.allRooms.Count > 0)
+                {
+                    Console.WriteLine("*** Delete room ***\n");
+
+                    this.allRooms.RemoveAt(this.selectedRoom - 1);
+                    this.currentNumberOfRooms--;
+                    Console.WriteLine("Room has been deleted");
+                }
+                else { Console.WriteLine("There are no rooms to delete"); }
+            }  
+        }
         public void ReadRoom()
         {
             Console.WriteLine("*** Add room ***\n");
@@ -107,6 +126,17 @@ namespace ConsoleReserveDeskApp
 
             string roomName = Console.ReadLine();
             this.AddRoom(roomName);
+        }
+        public void AddDesk()
+        {
+            Console.WriteLine("*** Add desk ***\n");
+
+            SelectRoom();
+
+            if (this.selectedRoom != 0)
+            {
+                this.allRooms[this.selectedRoom - 1].AddDesk();
+            }
         }
         public void SelectRoom()
         {

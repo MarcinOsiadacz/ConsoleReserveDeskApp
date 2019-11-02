@@ -56,7 +56,7 @@ namespace ConsoleReserveDeskApp
 
                         adminMenuOper = Menu.ReadOper();
 
-                        while (adminMenuOper != '2')
+                        while (adminMenuOper != '5')
                         {
                             Console.Clear();
 
@@ -65,6 +65,16 @@ namespace ConsoleReserveDeskApp
                                 case '1':
                                     building.ReadRoom();
                                     Menu.WaitForAnyButton();
+                                    break;
+                                case '2':
+                                    building.DeleteRoom();
+                                    Menu.WaitForAnyButton();
+                                    break;
+                                case '3':
+                                    building.AddDesk();
+                                    Menu.WaitForAnyButton();
+                                    break;
+                                case '4':
                                     break;
                                 default:
                                     break;

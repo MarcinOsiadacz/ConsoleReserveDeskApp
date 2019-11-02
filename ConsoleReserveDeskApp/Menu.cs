@@ -28,7 +28,10 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("Think before you type.\n");
             Console.WriteLine("Please choose an option: ");
             Console.WriteLine("1. Add room");
-            Console.WriteLine("2. Quit Administrator Mode");
+            Console.WriteLine("2. Delete room");
+            Console.WriteLine("3. Add desk");
+            Console.WriteLine("4. Delete desk");
+            Console.WriteLine("5. Quit Administrator Mode");
         }
         public static void WaitForAnyButton()
         {
