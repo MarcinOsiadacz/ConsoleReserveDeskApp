@@ -9,21 +9,21 @@ namespace ConsoleReserveDeskApp
     class Desk : Equipment
     {
         private User assignedUser;
-        private bool isReserved;
+        private bool reservationStatus;
        
-        public Desk(string userFirstName = "", string userLastName = "", int number = 0, bool isReserved = false)
+        public Desk(string userFirstName = "", string userLastName = "", int number = 0, bool reservationStatus = false)
         {
             this.assignedUser = new User(userFirstName, userLastName);
             this.number = number;
-            this.isReserved = isReserved;
+            this.reservationStatus = reservationStatus;
         }
         public override bool IsReserved()
         {
-            return this.isReserved;
+            return this.reservationStatus;
         }
         public override void Reserve()
         {
-            if (this.isReserved) { Console.WriteLine("The desk is already assigned"); }
+            if (this.reservationStatus) { Console.WriteLine("The desk is already assigned"); }
             else
             {
                 Console.WriteLine("Please enter a first name: ");
@@ -32,7 +32,7 @@ namespace ConsoleReserveDeskApp
                 Console.WriteLine("Please enter a last name: ");
                 this.assignedUser.LastName = Console.ReadLine();
 
-                this.isReserved = true;
+                this.reservationStatus = true;
 
                 Console.WriteLine(
                     $"The desk {this.number}. has been assigned to {assignedUser.FirstName} {assignedUser.LastName}");
@@ -40,12 +40,12 @@ namespace ConsoleReserveDeskApp
         }
         public override void Release()
         {
-            if (this.isReserved)
+            if (this.reservationStatus)
             {
                 this.assignedUser.FirstName = "";
                 this.assignedUser.LastName = "";
 
-                this.isReserved = false;
+                this.reservationStatus = false;
 
                 Console.WriteLine("The desk has been released");
             }
@@ -53,7 +53,7 @@ namespace ConsoleReserveDeskApp
         }
         public override void Print()
         {
-            if(this.isReserved)
+            if(this.reservationStatus)
             {
                 Console.WriteLine(
                     $"Desk {this.number} - assigned to {this.assignedUser.FirstName} {this.assignedUser.LastName}");

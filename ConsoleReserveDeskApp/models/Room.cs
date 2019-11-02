@@ -24,57 +24,75 @@ namespace ConsoleReserveDeskApp
             // Number 0 means unassigned desk.
             this.selectedDesk = 0;
 
-            for (int i = 0; i < MaxNumberOfDesks; i++)
-            {   // Desk objects are created for the first half of the list
-                if (i < (MaxNumberOfDesks/2)) { this.allDesks.Add(new Desk(number: i + 1)); }
-                // and HotDesk objects for the second one.
-                else { this.allDesks.Add(new HotDesk(number: i + 1)); }  
+            for (int i = 0; i < MaxNumberOfDesks/2; i++)
+            {   
+                if (i % 2 == 0)
+                {
+                    this.allDesks.Add(new Desk(number: i + 1));
+                }
+                else
+                {
+                    this.allDesks.Add(new HotDesk(number: i + 1));
+                }
             }
         }
         public void PrintAllDesks()
         {
-            foreach (Equipment desk in this.allDesks) { desk.Print(); }
+            if (this.allDesks.Count > 0)
+            {
+                foreach (Equipment desk in this.allDesks) { desk.Print(); }
 
-            Console.WriteLine($"Total desks: {MaxNumberOfDesks}\n");
+                Console.WriteLine($"Total desks: {this.allDesks.Count}\n");
+            }
+            else { Console.WriteLine("There are no desks in this room"); }
+
         }
         public void PrintAvailableDesks()
         {
-            int availableDeskCounter = 0;
-
-            foreach (Equipment desk in this.allDesks)
+            if (this.allDesks.Count > 0)
             {
-                // HotDesk instances are always available even if they are reserved on certain dates
-                if (desk.GetType() == typeof(HotDesk))
+                int availableDeskCounter = 0;
+
+                foreach (Equipment desk in this.allDesks)
                 {
-                    desk.Print();
-                    availableDeskCounter++;
-                }
-                else
-                { // Desk instances are available only if IsReserved method returns false
-                    if (!desk.IsReserved())
+                    // HotDesk instances are always available even if they are reserved on certain dates
+                    if (desk.GetType() == typeof(HotDesk))
                     {
                         desk.Print();
                         availableDeskCounter++;
                     }
-                }  
-            }
+                    else
+                    { // Desk instances are available only if IsReserved method returns false
+                        if (!desk.IsReserved())
+                        {
+                            desk.Print();
+                            availableDeskCounter++;
+                        }
+                    }
+                }
 
-            Console.WriteLine($"Total available desks: {availableDeskCounter}\n");
+                Console.WriteLine($"Total available desks: {availableDeskCounter}\n");
+            }
+            else { Console.WriteLine("There are no desks in this room"); }
         }
         public void PrintReservedDesks()
         {
-            int reservedDeskCounter = 0;
-
-            foreach (Equipment desk in this.allDesks)
+            if (this.allDesks.Count > 0)
             {
-                if (desk.IsReserved())
-                {
-                    desk.Print();
-                    reservedDeskCounter++;
-                }
-            }
+                int reservedDeskCounter = 0;
 
-            Console.WriteLine($"Total reserved desks: {reservedDeskCounter}\n");
+                foreach (Equipment desk in this.allDesks)
+                {
+                    if (desk.IsReserved())
+                    {
+                        desk.Print();
+                        reservedDeskCounter++;
+                    }
+                }
+
+                Console.WriteLine($"Total reserved desks: {reservedDeskCounter}\n");
+            }
+            else { Console.WriteLine("There are no desks in this room"); }
         }
         public void AddReservation()
         {
