@@ -138,6 +138,17 @@ namespace ConsoleReserveDeskApp
                 this.allRooms[this.selectedRoom - 1].AddDesk();
             }
         }
+        public void DeleteDesk()
+        {
+            Console.WriteLine("*** Delete desk ***\n");
+
+            SelectRoom();
+
+            if (this.selectedRoom != 0)
+            {
+                this.allRooms[this.selectedRoom - 1].DeleteDesk();
+            }
+        }
         public void SelectRoom()
         {
             PrintAllRooms();

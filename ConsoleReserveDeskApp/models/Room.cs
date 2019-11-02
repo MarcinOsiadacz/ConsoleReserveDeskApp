@@ -141,11 +141,34 @@ namespace ConsoleReserveDeskApp
             PrintReservedDesks();
             SelectDesk();
 
-            if (this.selectedDesk != 0) { this.allDesks[this.selectedDesk - 1].Release(); }
+            if (this.selectedDesk != 0)
+            {
+                this.allDesks[this.selectedDesk - 1].Release();
+            }
         }
         public void Print()
         {
             Console.WriteLine($"Room {this.Name}\n");
+        }
+        public void DeleteDesk()
+        {
+            Console.WriteLine("*** Delete Desk ***");
+            this.PrintAllDesks();
+
+            if (this.allDesks.Count > 0)
+            {
+                SelectDesk();
+                
+                if (this.selectedDesk != 0)
+                {
+                    this.allDesks.RemoveAt(this.selectedDesk - 1);
+                    Console.WriteLine("Desk has been deleted");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no desks in this room");
+            }
         }
         public void AddDesk()
         {

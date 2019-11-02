@@ -75,6 +75,8 @@ namespace ConsoleReserveDeskApp
                                     Menu.WaitForAnyButton();
                                     break;
                                 case '4':
+                                    building.DeleteDesk();
+                                    Menu.WaitForAnyButton();
                                     break;
                                 default:
                                     break;
