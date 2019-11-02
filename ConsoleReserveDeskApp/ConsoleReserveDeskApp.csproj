@@ -46,7 +46,7 @@
     <Compile Include="Menu.cs" />
     <Compile Include="models\Building.cs" />
     <Compile Include="models\Desk.cs" />
-    <Compile Include="models\Furniture.cs" />
+    <Compile Include="models\Equipment.cs" />
     <Compile Include="interfaces\IReservation.cs" />
     <Compile Include="interfaces\IReservationManagement.cs" />
     <Compile Include="models\HotDesk.cs" />

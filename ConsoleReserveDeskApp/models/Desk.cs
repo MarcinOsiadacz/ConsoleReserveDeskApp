@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class Desk : Furniture
+    class Desk : Equipment
     {
         private User assignedUser;
         private bool isReserved;

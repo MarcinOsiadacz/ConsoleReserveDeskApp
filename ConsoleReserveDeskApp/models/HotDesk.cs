@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    class HotDesk : Desk
+    class HotDesk : Equipment
     {
         // This list holds current reservations for HotDesk object
         private List<Reservation> currentReservations = new List<Reservation>();

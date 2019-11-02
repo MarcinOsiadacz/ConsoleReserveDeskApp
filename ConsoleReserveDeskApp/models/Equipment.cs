@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleReserveDeskApp
 {
-    abstract class Furniture : IReservation
+    abstract class Equipment : IReservation
     {
         // If the number value is 0, there is no assigned desk. In this case, the desk does not physically exist,
         // so it should not be possible to reserve it.
