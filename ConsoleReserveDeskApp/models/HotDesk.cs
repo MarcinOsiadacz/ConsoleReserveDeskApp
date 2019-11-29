@@ -99,15 +99,27 @@ namespace ConsoleReserveDeskApp
             }
             else { Console.WriteLine($"Hot desk {this.number} - available"); }
         }
-        private bool IsReservationValid()
-        {   // Returns true if the reservation is valid and can be made. False otherwise.
-
-            bool isValid = true;
+        private int IsReservationValid()
+        {   
+            //bool isValid = true;
+            int isValid = 1;
 
             // Reservation is invalid if it ends before it begins
             if (DateTime.Compare(this.selectedReservation.StartTime, this.selectedReservation.EndTime) == 1)
             {
-                isValid = false;
+                //isValid = false;
+                isValid = -1;
+                return isValid;
+            }
+            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalHours) < 1)
+            {// reservation is shorther than 1 hour
+                isValid = -2;
+                return isValid;
+            }
+            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalDays) > 7)
+            {// reservation is longer than one week
+                isValid = -3;
+                return isValid;
             }
             // Else if there are any reservations for this desk
             else if (this.currentReservations.Count > 0)
@@ -119,14 +131,14 @@ namespace ConsoleReserveDeskApp
                     if (DateTime.Compare(this.selectedReservation.StartTime, currentReservation.StartTime) == 1 
                         && DateTime.Compare(this.selectedReservation.StartTime, currentReservation.EndTime) == -1)
                     {
-                        isValid = false;
+                        isValid = -4;
                         break;
                     }
                     // Reservation is invalid if it ends during another reservation
                     else if (DateTime.Compare(this.selectedReservation.EndTime, currentReservation.StartTime) == 1 
                         && DateTime.Compare(this.selectedReservation.EndTime, currentReservation.EndTime) == -1)
                     {
-                        isValid = false;
+                        isValid = -4;
                         break;
                     }
                 }
