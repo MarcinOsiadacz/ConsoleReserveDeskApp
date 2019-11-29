@@ -23,7 +23,7 @@ namespace ConsoleReserveDeskApp
         }
         public override void Reserve()
         {
-            if (this.reservationStatus) { Console.WriteLine("The desk is already assigned"); }
+            if (this.reservationStatus) Console.WriteLine("The desk is already assigned");
             else
             {
                 Console.WriteLine("Please enter a first name: ");
@@ -49,16 +49,16 @@ namespace ConsoleReserveDeskApp
 
                 Console.WriteLine("The desk has been released");
             }
-            else { Console.WriteLine("Reservation does not exist"); }
+            else Console.WriteLine("Reservation does not exist");
         }
         public override void Print()
         {
-            if(this.reservationStatus)
+            if (this.reservationStatus)
             {
-                Console.WriteLine(
-                    $"Desk {this.number} - assigned to {this.assignedUser.FirstName} {this.assignedUser.LastName}");
+                Console.WriteLine(String.Format(
+                    "{0,-8} {1,-2} - assigned to {2,0} {3,0}", "Desk", this.number, this.assignedUser.FirstName, this.assignedUser.LastName));
             }
-            else { Console.WriteLine($"Desk {this.number} - available"); }
+            else Console.WriteLine(String.Format("{0,-8} {1,-2} - available", "Desk", this.number));
         }
     }
 }

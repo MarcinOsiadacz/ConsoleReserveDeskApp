@@ -21,7 +21,7 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintAllDesks()
         {
-            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            if (this.allRooms.Count == 0) Console.WriteLine("No rooms available in the building");
             else
             {
                 foreach (Room room in this.allRooms)
@@ -33,8 +33,7 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintAvailableDesks()
         {
-            if (this.allRooms.Count == 0) {
-                Console.WriteLine("No rooms available in the building"); }
+            if (this.allRooms.Count == 0) Console.WriteLine("No rooms available in the building");
             else
             {
                 foreach (Room room in this.allRooms)
@@ -46,7 +45,7 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintReservedDesks()
         {
-            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            if (this.allRooms.Count == 0) Console.WriteLine("No rooms available in the building");
             else
             {
                 foreach (Room room in this.allRooms)
@@ -61,19 +60,16 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("*** Add reservation ***\n");
 
             SelectRoom();
-
             if (this.selectedRoom != 0)
             {
                 this.allRooms[this.selectedRoom - 1].AddReservation();
             }
         }
-
         public void DeleteReservation()
         {
             Console.WriteLine("*** Delete reservation ***\n");
 
             SelectRoom();
-
             if (this.selectedRoom != 0)
             {
                 this.allRooms[this.selectedRoom - 1].DeleteReservation();
@@ -84,7 +80,6 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("*** Check reservation ***\n");
 
             SelectRoom();
-
             if(this.selectedRoom != 0)
             {
                 this.allRooms[this.selectedRoom - 1].CheckReservation();
@@ -98,32 +93,30 @@ namespace ConsoleReserveDeskApp
                 this.currentNumberOfRooms++;
                 Console.WriteLine($"Room {name} has been added to the building");
             }
-            else { Console.WriteLine("No more rooms can be added"); }
+            else Console.WriteLine("No more rooms can be added");
         }
         public void DeleteRoom()
         {
             Console.WriteLine("*** Delete room ***\n");
 
             SelectRoom();
-            
             if(this.selectedRoom != 0)
             {
                 if (this.allRooms.Count > 0)
                 {
                     Console.WriteLine("*** Delete room ***\n");
-
                     this.allRooms.RemoveAt(this.selectedRoom - 1);
                     this.currentNumberOfRooms--;
                     Console.WriteLine("Room has been deleted");
                 }
-                else { Console.WriteLine("There are no rooms to delete"); }
+                else Console.WriteLine("There are no rooms to delete");
             }  
         }
         public void ReadRoom()
         {
             Console.WriteLine("*** Add room ***\n");
-            Console.WriteLine("Enter room name: ");
 
+            Console.WriteLine("Enter room name: ");
             string roomName = Console.ReadLine();
             this.AddRoom(roomName);
         }
@@ -132,7 +125,6 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("*** Add desk ***\n");
 
             SelectRoom();
-
             if (this.selectedRoom != 0)
             {
                 this.allRooms[this.selectedRoom - 1].AddDesk();
@@ -143,7 +135,6 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("*** Delete desk ***\n");
 
             SelectRoom();
-
             if (this.selectedRoom != 0)
             {
                 this.allRooms[this.selectedRoom - 1].DeleteDesk();
@@ -152,7 +143,6 @@ namespace ConsoleReserveDeskApp
         public void SelectRoom()
         {
             PrintAllRooms();
-
             if (this.allRooms.Count > 0)
             {   
                 int tmpSelectedRoom;
@@ -160,11 +150,10 @@ namespace ConsoleReserveDeskApp
                 Console.WriteLine("Please enter a number of the room (or 0 to quit): ");
                 string strRoom = Console.ReadLine();
 
-                if (!Int32.TryParse(strRoom, out tmpSelectedRoom)) { Console.WriteLine("Invalid number"); }
+                if (!Int32.TryParse(strRoom, out tmpSelectedRoom)) Console.WriteLine("Invalid number");
                 else
                 {
                     this.selectedRoom = tmpSelectedRoom;
-
                     if (this.selectedRoom < 0 || this.selectedRoom > this.currentNumberOfRooms)
                     {
                         if (this.selectedRoom != 0)
@@ -178,14 +167,13 @@ namespace ConsoleReserveDeskApp
         }
         public void PrintAllRooms()
         {
-            if (this.allRooms.Count == 0) { Console.WriteLine("No rooms available in the building"); }
+            if (this.allRooms.Count == 0) Console.WriteLine("No rooms available in the building");
             else
             {
                 for (int i = 0; i < this.currentNumberOfRooms; i++)
                 {
                     Console.WriteLine($"{i + 1}. {this.allRooms[i].Name}");
                 }
-
                 Console.WriteLine($"Total rooms: {this.currentNumberOfRooms}\n");
             }
         }

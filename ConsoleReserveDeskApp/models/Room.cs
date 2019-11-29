@@ -8,12 +8,11 @@ namespace ConsoleReserveDeskApp
 {
     class Room : IReservationManagement
     {
-        // Room class is used to manage desks
         private string name;
         private const int maxNumberOfDesks = 20;
         // allDesks list stores objects of all Desk derived classes
         private List<Equipment> allDesks = new List<Equipment>();
-        // selectedDesk field stores the number of the desk selected by user in reservation related methods.
+        // selectedDesk field stores the number of the desk selected by user in reservation related methods
         private int selectedDesk;
 
         public string Name { get => name; set => name = value; }
@@ -40,12 +39,11 @@ namespace ConsoleReserveDeskApp
         {
             if (this.allDesks.Count > 0)
             {
-                foreach (Equipment desk in this.allDesks) { desk.Print(); }
+                foreach (Equipment desk in this.allDesks) desk.Print();
 
                 Console.WriteLine($"Total desks: {this.allDesks.Count}\n");
             }
-            else { Console.WriteLine("There are no desks in this room"); }
-
+            else Console.WriteLine("There are no desks in this room");
         }
         public void PrintAvailableDesks()
         {
@@ -54,15 +52,14 @@ namespace ConsoleReserveDeskApp
                 int availableDeskCounter = 0;
 
                 foreach (Equipment desk in this.allDesks)
-                {
-                    // HotDesk instances are always available even if they are reserved on certain dates
+                {   // HotDesk instances are always available even if they are reserved on certain dates
                     if (desk.GetType() == typeof(HotDesk))
                     {
                         desk.Print();
                         availableDeskCounter++;
                     }
                     else
-                    { // Desk instances are available only if IsReserved method returns false
+                    {   // Desk instances are available only if IsReserved method returns false
                         if (!desk.IsReserved())
                         {
                             desk.Print();
@@ -70,10 +67,9 @@ namespace ConsoleReserveDeskApp
                         }
                     }
                 }
-
                 Console.WriteLine($"Total available desks: {availableDeskCounter}\n");
             }
-            else { Console.WriteLine("There are no desks in this room"); }
+            else Console.WriteLine("There are no desks in this room");
         }
         public void PrintReservedDesks()
         {
@@ -92,7 +88,7 @@ namespace ConsoleReserveDeskApp
 
                 Console.WriteLine($"Total reserved desks: {reservedDeskCounter}\n");
             }
-            else { Console.WriteLine("There are no desks in this room"); }
+            else Console.WriteLine("There are no desks in this room");
         }
         public void AddReservation()
         {
@@ -100,7 +96,7 @@ namespace ConsoleReserveDeskApp
             PrintAvailableDesks();
             SelectDesk();
 
-            if(this.selectedDesk != 0) { this.allDesks[this.selectedDesk - 1].Reserve(); }
+            if(this.selectedDesk != 0) this.allDesks[this.selectedDesk - 1].Reserve();
         }
         public void SelectDesk()
         {
@@ -109,11 +105,10 @@ namespace ConsoleReserveDeskApp
             Console.WriteLine("Please enter a number of the desk (or 0 to quit): ");
             string strDesk = Console.ReadLine();
 
-            if (!Int32.TryParse(strDesk, out tmpSelectedDesk)) { Console.WriteLine("Invalid number"); }
+            if (!Int32.TryParse(strDesk, out tmpSelectedDesk)) Console.WriteLine("Invalid number");
             else
             {
                 this.selectedDesk = tmpSelectedDesk;
-
                 if(this.selectedDesk < 0 || this.selectedDesk > maxNumberOfDesks)
                 {
                     if(this.selectedDesk != 0)
@@ -127,8 +122,8 @@ namespace ConsoleReserveDeskApp
         public void CheckReservation()
         {
             Console.WriteLine("*** Check reservation ***");
-            SelectDesk();
 
+            SelectDesk();
             if (this.selectedDesk != 0)
             {
                 this.allDesks[this.selectedDesk - 1].Print();
@@ -139,8 +134,8 @@ namespace ConsoleReserveDeskApp
         {
             Console.WriteLine("*** Delete reservation ***");
             PrintReservedDesks();
-            SelectDesk();
 
+            SelectDesk();
             if (this.selectedDesk != 0)
             {
                 this.allDesks[this.selectedDesk - 1].Release();
@@ -158,17 +153,13 @@ namespace ConsoleReserveDeskApp
             if (this.allDesks.Count > 0)
             {
                 SelectDesk();
-                
                 if (this.selectedDesk != 0)
                 {
                     this.allDesks.RemoveAt(this.selectedDesk - 1);
                     Console.WriteLine("Desk has been deleted");
                 }
             }
-            else
-            {
-                Console.WriteLine("There are no desks in this room");
-            }
+            else Console.WriteLine("There are no desks in this room");
         }
         public void AddDesk()
         {
@@ -197,10 +188,7 @@ namespace ConsoleReserveDeskApp
                         break;
                 }
             }
-            else
-            {
-                Console.WriteLine("No more desks can be added");
-            }
+            else Console.WriteLine("No more desks can be added");
         }
         private void ResetSelectedDesk()
         {

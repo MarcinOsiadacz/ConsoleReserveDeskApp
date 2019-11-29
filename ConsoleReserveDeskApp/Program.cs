@@ -12,7 +12,7 @@ namespace ConsoleReserveDeskApp
         {
 
             Building building = new Building();
-            building.AddRoom("Test 99");
+            building.AddRoom("Test Building");
 
             char mainMenuOper;
             Menu.PrintMainMenu();
