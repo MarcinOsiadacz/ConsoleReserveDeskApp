@@ -52,15 +52,22 @@ namespace ConsoleReserveDeskApp
         }
         public override void Reserve()
         {   
-            if (!this.SelectReservation()) { Console.WriteLine("Incorrect reservation data format"); }
+            if (!this.SelectReservation()) Console.WriteLine("Incorrect reservation data format");
             else
             {
-                if (!this.IsReservationValid()) { Console.WriteLine("The hot desk reservation cannot be made"); }
-                else
+                int isValid = this.IsReservationValid();
+                if (isValid == 1)
                 {
                     this.currentReservations.Add(this.selectedReservation);
-
                     Console.WriteLine($"The hot desk {this.number}. has been reserved from {this.selectedReservation.StartTime} to {this.selectedReservation.EndTime} for {this.selectedReservation.User.FirstName} {this.selectedReservation.User.LastName}");
+                }
+                else
+                {
+                    if (isValid == -1) Console.WriteLine("Reservation cannot end before it starts");
+                    else if (isValid == -2) Console.WriteLine("Minimum reservation length is 1 hour");
+                    else if (isValid == -3) Console.WriteLine("Maximum reservation length is 1 week (7 days)");
+                    else if (isValid == -4) Console.WriteLine("There is already another reservation at the selected time");
+                    else Console.WriteLine("Unknown error, please try again");
                 }
             }
         }
@@ -111,12 +118,12 @@ namespace ConsoleReserveDeskApp
                 isValid = -1;
                 return isValid;
             }
-            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalHours) < 1)
+            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalHours) <= 1)
             {// reservation is shorther than 1 hour
                 isValid = -2;
                 return isValid;
             }
-            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalDays) > 7)
+            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalDays) >= 7)
             {// reservation is longer than one week
                 isValid = -3;
                 return isValid;
