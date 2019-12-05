@@ -53,7 +53,7 @@ namespace ConsoleReserveDeskApp
 
                 foreach (Equipment desk in this.allDesks)
                 {   // HotDesk instances are always available even if they are reserved on certain dates
-                    if (desk.GetType() == typeof(HotDesk))
+                    if (desk is HotDesk)
                     {
                         desk.Print();
                         availableDeskCounter++;
