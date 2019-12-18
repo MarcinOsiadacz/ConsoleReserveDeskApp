@@ -79,6 +79,10 @@ namespace ConsoleReserveDeskApp
                     {
                         Console.WriteLine("There is already another reservation at the selected time");
                     }
+                    else if (isValid == -5)
+                    {
+                        Console.WriteLine("Reservation cannot be made for an earlier date and time than now");
+                    }
                     else Console.WriteLine("Unknown error, please try again");
                 }
             }
@@ -124,13 +128,14 @@ namespace ConsoleReserveDeskApp
             // -2 if shorther than 1 hour
             // -3 if longer than 1 week
             // -4 if there is already another reservation at selected time
+            // -5 if selected date and time is earlier than now
             int isValid = 1;
             if (DateTime.Compare(this.selectedReservation.StartTime, this.selectedReservation.EndTime) == 1)
             {
                 isValid = -1;
                 return isValid;
             }
-            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalHours) <= 1)
+            if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalMinutes) < 60)
             {
                 isValid = -2;
                 return isValid;
@@ -138,6 +143,12 @@ namespace ConsoleReserveDeskApp
             if ((this.selectedReservation.EndTime.Subtract(this.selectedReservation.StartTime).TotalDays) >= 7)
             {
                 isValid = -3;
+                return isValid;
+            }
+            if (this.selectedReservation.StartTime < DateTime.Now ||
+                this.selectedReservation.EndTime < DateTime.Now)
+            {
+                isValid = -5;
                 return isValid;
             }
             // if there are any reservations for this desk
